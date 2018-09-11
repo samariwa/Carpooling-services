@@ -1,2 +1,2 @@
-# Carpooling-services
-This repository  entails code for an application that facilitates carpooling services.
+# Matatu Sacco-Management-system
+This repository  entails code for a matatu sacco management system.
