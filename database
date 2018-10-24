@@ -1,0 +1,35 @@
+
+import java.sql.*;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author nelly
+ */
+public class dbconnect {
+    
+    private Connection con;
+    private Statement st;
+    private ResultSet rs;
+    
+    /**
+     *
+     * @param args
+     */
+    public dbconnect(String []args){
+        try {
+             //registering JDBC driver
+            Class.forName("com.mysql.jdbc.Driver");
+            //establishing connection to database
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/matatu system","root","");
+            
+            st = con.createStatement(); 
+        }catch (ClassNotFoundException | SQLException e){
+            System.out.println("Error;"+e);
+        }
+    }
