@@ -1,0 +1,120 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package database;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author nelly
+ */
+public class kitengelaedit
+{
+     //gui page for adding a new fare rates into the system
+   JFrame newrate=new JFrame("Kitengela Fare Edit"); 
+   JPanel a=new JPanel();
+   JLabel details=new JLabel("Enter the new fares.");
+   JLabel stage1=new JLabel("Town to Nyayo/Nyayo to town:");
+   JLabel stage2=new JLabel("Town to Syokimau/Syokimau to town :");
+   JLabel stage3=new JLabel("Town to Kitengela/Kitengela to town:");
+   JTextField  stage1text=new JTextField();
+   JTextField stage2text=new JTextField();
+   JTextField stage3text=new JTextField();
+   JButton clear=new JButton("Clear");
+   JButton save=new JButton("Save");
+   JButton back=new JButton("<-Back");
+   Database connect=new Database();
+    public kitengelaedit()
+        {
+            formGUI();
+        }
+        public void formGUI()
+        {
+             //setting the colour of the background for the page
+        a.setBackground(Color.WHITE);
+        //setting the font to be used 
+        details.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage1.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage2.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage3.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage1text.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage2text.setFont(new Font("sanserif",Font.PLAIN,28));
+        stage3text.setFont(new Font("sanserif",Font.PLAIN,28));
+        clear.setFont(new Font("sanserif",Font.PLAIN,28));
+        save.setFont(new Font("sanserif",Font.PLAIN,28));
+        back.setFont(new Font("sanserif",Font.PLAIN,28));
+        a.setLayout(null);
+        //adding the JPanel components that have been imported
+        a.add(details);
+        a.add(stage1);
+        a.add(stage2);
+        a.add(stage3);
+        a.add(stage1text);
+        a.add(stage2text);
+        a.add(stage3text);
+        a.add(clear);
+        a.add(save);
+        a.add(back);
+        newrate.add(a);
+        //adding an actionlistener for the back button
+        back.addActionListener((java.awt.event.ActionEvent goback)->{returnactionPerformed(goback);});
+        //adding an actionlistener for the clear button
+        clear.addActionListener((java.awt.event.ActionEvent clean)->{clearactionPerformed(clean);});
+        //actionlistener for save button
+        save.addActionListener((java.awt.event.ActionEvent s)->{addactionPerformed(s);});
+        //layout setup
+        details.setBounds(700,60,700,40);
+        stage1.setBounds(200,200,600,45);
+        stage2.setBounds(200,350,600,45);
+        stage3.setBounds(200,500,600,45);
+        stage1text.setBounds(750,200,500,45);
+        stage2text.setBounds(750,350,500,45);
+        stage3text.setBounds(750,500,500,45);
+        clear.setBounds(600,900,250,45);
+        save.setBounds(1100,900,250,45);
+        back.setBounds(200,60,250,45);
+        //setting the size of the JFrame
+        newrate.setSize(2000,1300);
+        //setting how the gui will be closed by the user
+        newrate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newrate.setVisible(true);
+        }
+         public void returnactionPerformed(ActionEvent goback)
+        {
+            farerateschart page=new farerateschart();
+        }
+            public void clearactionPerformed(ActionEvent clean)
+        {
+            stage1text.setText(null);
+            stage2text.setText(null);
+            stage3text.setText(null);
+       }  
+             public void addactionPerformed(ActionEvent s)
+        {
+            Connection conn= connect.getConnection();
+            try
+            {    
+                String Query ="insert into kitengelafarerate(nyayo,syokimau,kitengela)Values('"+stage1text.getText()+"','"+stage2text.getText()+"','"+stage3text.getText()+"')";
+                PreparedStatement st = conn.prepareStatement(Query);
+                st.executeUpdate(); 
+                System.out.print("Added");
+            }
+            catch(SQLException ex)
+            {
+                System.out.print("NULL");
+            }
+        }
+}
