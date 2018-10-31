@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package matatu.system;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,21 +12,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 /**
  *
- * @author samue
+ * @author iamka
  */
-public class ReadOnlyReportPage
-{
-      // adding a GUI frame with a title 'Reports' on it
+public class ReadOnlyReportPage {
     JFrame reports=new JFrame("Reports");
     JPanel a=new JPanel();
     //adding a Label that shows what is to be done by user
-    JLabel instruction=new JLabel("Key in a report for the sacco.");
+    JLabel instruction=new JLabel(" Report for the sacco.");
     JTextField newreport=new JTextField();
-    JButton clear=new JButton("Clear");
-    JButton save=new JButton("Save");
+    JTextField reportdate=new JTextField();
+     
     JButton back=new JButton("<- Back");
      public ReadOnlyReportPage()
         {
@@ -39,18 +35,17 @@ public class ReadOnlyReportPage
         a.setBackground(Color.WHITE);
         //setting the page to be a read only page
         newreport.setEditable(false);
+        reportdate.setEditable(false);
         //setting the font to be used 
         instruction.setFont(new Font("sanserif",Font.PLAIN,28));
-        clear.setFont(new Font("sanserif",Font.PLAIN,28));
         newreport.setFont(new Font("sanserif",Font.PLAIN,28));
-        save.setFont(new Font("sanserif",Font.PLAIN,28));
+        reportdate.setFont(new Font("sanserif",Font.PLAIN,28));
         back.setFont(new Font("sanserif",Font.PLAIN,28));
          a.setLayout(null); 
          //adding the JPanel components that have been imported
         a.add(instruction);
         a.add(newreport);
-        a.add(clear);
-        a.add(save);
+        a.add(reportdate);
         a.add(back);
         reports.add(a); 
         //adding an actionlistener for the back button
@@ -58,8 +53,7 @@ public class ReadOnlyReportPage
         //layout setup
         instruction.setBounds(650,50,700,35);
         newreport.setBounds(70,150,1780,650);
-        clear.setBounds(500,870,150,50);
-        save.setBounds(1200,870,150,50);
+        reportdate.setBounds(120,100,600,45);
         back.setBounds(1500,50,200,35);
          //setting the size of the JFrame
         reports.setSize(2000,1300);
@@ -69,7 +63,6 @@ public class ReadOnlyReportPage
         }
         public void returnactionPerformed(ActionEvent goback)
         {
-            homepage homepage=new homepage();
+            homepagereadonly homepage=new homepagereadonly();
         }
-    
 }
