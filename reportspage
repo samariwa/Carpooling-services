@@ -1,0 +1,109 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package database;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author nelly
+ */
+public class reportspage
+{
+     // adding a GUI frame with a title 'Reports' on it
+    JFrame reports=new JFrame("Reports");
+    JPanel a=new JPanel();
+    //adding a Label that shows what is to be done by user
+    JLabel instruction=new JLabel("Key in a report for the sacco.");
+    JTextArea newreport=new JTextArea(1780,650);
+    JScrollPane pane=new JScrollPane(newreport);
+    JTextField reportdate=new JTextField();
+    JButton clear=new JButton("Clear");
+    JButton save=new JButton("Save");
+    JButton back=new JButton("<- Back");
+    Database connect=new Database();
+     public reportspage()
+        {
+            formGUI();
+        }
+        public void formGUI()
+        {
+        //setting the colour of the background for the page
+        a.setBackground(Color.WHITE);
+        //setting the font to be used 
+        instruction.setFont(new Font("sanserif",Font.PLAIN,28));
+        clear.setFont(new Font("sanserif",Font.PLAIN,28));
+        reportdate.setFont(new Font("sanserif",Font.PLAIN,28));
+        newreport.setFont(new Font("sanserif",Font.PLAIN,28));
+        save.setFont(new Font("sanserif",Font.PLAIN,28));
+        back.setFont(new Font("sanserif",Font.PLAIN,28));
+         a.setLayout(null); 
+         //adding the JPanel components that have been imported
+        a.add(instruction);
+        a.add(newreport);
+        a.add(pane);
+        a.add(reportdate);
+        a.add(clear);
+        a.add(save);
+        a.add(back);
+        reports.add(a);
+        //adding an actionlistener for the clear button
+        clear.addActionListener((java.awt.event.ActionEvent clean)->{clearactionPerformed(clean);});
+        //adding an actionlistener for the back button
+        back.addActionListener((java.awt.event.ActionEvent goback)->{returnactionPerformed(goback);});
+        //actionlistener for save button
+        save.addActionListener((java.awt.event.ActionEvent s)->{addactionPerformed(s);});
+        //layout setup
+        instruction.setBounds(650,30,700,35);
+        newreport.setBounds(120,130,1780,650);
+        pane.setBounds(120,130,1780,650);
+        reportdate.setBounds(120,65,600,45);
+        clear.setBounds(500,870,150,50);
+        save.setBounds(1200,870,150,50);
+        back.setBounds(1500,50,200,35);
+         //setting the size of the JFrame
+        reports.setSize(2000,1300);
+        //setting how the gui will be closed by the user
+        reports.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        reports.setVisible(true);
+        }
+        public void returnactionPerformed(ActionEvent goback)
+        {
+            homepage homepage=new homepage();
+        }
+          public void clearactionPerformed(ActionEvent clean)
+        {
+            newreport.setText(null); 
+            reportdate.setText(null); 
+       } 
+            public void addactionPerformed(ActionEvent s)
+        {
+            Connection conn= connect.getConnection();
+            try
+            {    
+                String Query ="insert into reports(report_date,report)Values('"+reportdate.getText()+"','"+newreport.getText()+"')";
+                PreparedStatement st = conn.prepareStatement(Query);
+                st.executeUpdate(); 
+                System.out.print("Added");
+            }
+            catch(SQLException ex)
+            {
+                System.out.print("NULL");
+            }
+        }
+}
