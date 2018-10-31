@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matatu.system;
+package matatusystem;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,14 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 /**
  *
- * @author samue
+ * @author iamka
  */
-public class vehiclespagereadonly 
-{
-    // adding a GUI frame with a title 'Vehicles' on it
+public class vehiclespagereadonly {
     JFrame vehicles=new JFrame("Vehicles");
     JPanel a=new JPanel();
     //adding a Label that shows what is to be done by user

@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matatu.system;
+package matatusystem;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,20 +19,21 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-/**
- *
- * @author samue
- */
-public class vehiclespage
-{
-    // adding a GUI frame with a title 'Vehicles' on it
-    JFrame vehicles=new JFrame("Vehicles");
+public class vehiclespage {
+     JFrame vehicles=new JFrame("Vehicles");
     JPanel a=new JPanel();
     //adding a Label that shows what is to be done by user
     JLabel instruction=new JLabel("Select one vehicle you would want to view.");
     String labels[] = { "KAJ 223V", "KBN 238A", "KBR 348D", "KAC 937H","KBC 457R", "KBA 348D", "KCN 572R", "KCA 484U","KBS 584P", "KAR 474C" };
     JList matatus=new JList(labels);
     JScrollPane list=new JScrollPane(matatus);
+    MouseListener mouseListener = new MouseAdapter(){
+        public void mouseClicked(MouseEvent e){
+            if(e.getClickCount() == 2){
+                VehicleTable vehicletable = new VehicleTable();
+            }
+        }
+    };
     JButton back=new JButton("<- Back");
      public vehiclespage()
         {
@@ -49,7 +53,8 @@ public class vehiclespage
         a.add(instruction);
         a.add(list);
         a.add(back);
-        vehicles.add(a); 
+        vehicles.add(a);
+        vehicles.addMouseListener(mouseListener); 
         //adding an actionlistener for the back button
         back.addActionListener((java.awt.event.ActionEvent goback)->{returnactionPerformed(goback);});
         //layout setup
@@ -66,7 +71,4 @@ public class vehiclespage
         {
             homepage homepage=new homepage();
         }
-        
-
-    
 }

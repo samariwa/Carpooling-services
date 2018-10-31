@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matatu.system;
+package matatusystem;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,13 +18,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-/**
- *
- * @author samue
- */
-public class conductorspage
-{
-     // adding a GUI frame with a title 'Conductors' on it
+public class conductorspage {
     JFrame conductors=new JFrame("Conductors");
     JPanel a=new JPanel();
     //adding a Label that shows what is to be done by user
@@ -29,6 +26,13 @@ public class conductorspage
     String names[] = { "James Mutegi-001", "Shawn Musili-002", "Joseph Karanja-003", "Reuben Nyaga-004","Brian Wekesa-005", "John Odhiambo-006", "Jacob Mutindu-007", "Isaac Waweru-008","Rose Wangechi-009", "Jack Mutembei-010" };
     JList employees=new JList(names);
     JScrollPane list=new JScrollPane(employees);
+     MouseListener mouseListener = new MouseAdapter(){
+        public void mouseClicked(MouseEvent e){
+            if(e.getClickCount() == 2){
+                ConductorTable Conductortable = new ConductorTable();
+            }
+        }
+    };
     JButton back=new JButton("<- Back");
      public conductorspage()
         {
@@ -48,7 +52,8 @@ public class conductorspage
         a.add(instruction);
         a.add(list);
         a.add(back);
-        conductors.add(a); 
+        conductors.add(a);
+        employees.addMouseListener(mouseListener);
         //adding an actionlistener for the back button
         back.addActionListener((java.awt.event.ActionEvent goback)->{returnactionPerformed(goback);});
         //layout setup
