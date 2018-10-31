@@ -15,30 +15,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-public class DonholmRoute {
-     JFrame fare= new JFrame("Fare rates for the Ngong route.");
+/**
+ *
+ * @author iamka
+ */
+public class Westlands {
+    JFrame fare= new JFrame("Fare rates for the Westland route");
     JPanel k=new JPanel();
-    JLabel title=new JLabel("Fare rates for the Ngong route.");
+    JLabel title=new JLabel("Fare rates for the Westlands route.");
     JButton back=new JButton("<- Back");
     
     
     
    String []columns = {"Route","On Peek","Off Peek"};
        String [][] data ={{"Route","On Peek","Off Peek"},
-           {"Town to Makadara","30","20"},
-           {"Town to Buruburu","70","50"},
-           {"Town to Outer ring","100","70"},
-           {"Town to Donholm","40","50"},
-           {"Madaraka to Buruburu","70","50"},
-           {"Madaraka to Outer ring","30","40"},
-           {"Madaraka to Donholm","70","50"},
-           {"Buruburu to Outer ring","40","20"},
-           {"Buruburu to Donhom","50","40"},
-           {"Outer ring to Donholm","40","30"}};
+           {"Town to Museum","30","20"},
+           {"Town to Chiromo","70","50"},
+           {"Town to Westlands","100","70"},
+           {"Museum to Chiromo","40","30"},
+           {"Museum to Westland","30","20"},
+           {"Chiromo to Westland","50","50"}};
        JTable Fare = new JTable(data,columns);
        JScrollPane sp= new JScrollPane(Fare);
-    public DonholmRoute (){
+    public Westlands(){
         formGUI();
     }
     
@@ -57,18 +56,17 @@ public class DonholmRoute {
         
         Fare.add(sp);
         Fare.setShowGrid(true);
-        Fare.setRowHeight(70);
+         Fare.setRowHeight(100);
         Fare.setAutoCreateRowSorter(true);
         
         back.addActionListener((java.awt.event.ActionEvent goback)->{returnactionPerformed(goback);});
-        title.setBounds(150,60,250,45);
         back.setBounds(1500,50,200,35);
-        
-        Fare.setBounds(220,150,1500,2000);
+        title.setBounds(650,60,250,45);
+        Fare.setBounds(220,100,1400,800);
         Fare = new JTable(data,columns);
-        Fare.setPreferredScrollableViewportSize(new Dimension(2000,1000));
-        Fare.setFillsViewportHeight(true);
-        Fare.setSize(1000,2000);
+       Fare.setPreferredScrollableViewportSize(new Dimension(2000,1000));
+       Fare.setFillsViewportHeight(true);
+       Fare.setSize(1000,900);
        
     }
 
@@ -76,4 +74,5 @@ public class DonholmRoute {
     public void returnactionPerformed(ActionEvent goback) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
